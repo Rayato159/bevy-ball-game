@@ -5,6 +5,7 @@ pub mod action;
 
 use setup::{
     player::spawn_player,
+    enemy::spawn_enemies,
     camera::spawn_camera
 };
 
@@ -19,7 +20,8 @@ fn main() {
         .add_plugins(DefaultPlugins)
         .add_systems(Startup, (
             spawn_camera,
-            spawn_player
+            spawn_player,
+            spawn_enemies,
         ))
         .add_systems(Update, (
             player_movement,
