@@ -1,5 +1,4 @@
-use bevy::prelude::*;
-use bevy::window::PrimaryWindow;
+use bevy::{prelude::*, window::PrimaryWindow};
 
 #[derive(Component)]
 pub struct Player;
