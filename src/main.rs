@@ -1,7 +1,7 @@
 use bevy::prelude::*;
 
 pub mod setup;
-pub mod action;
+pub mod systems;
 pub mod config;
 pub mod components;
 
@@ -11,7 +11,7 @@ use setup::{
     camera::spawn_camera
 };
 
-use action::player_movement::{
+use systems::player_movement::{
     player_movement,
     confine_player_movement_x,
     confine_player_movement_y
