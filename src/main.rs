@@ -15,9 +15,25 @@ use action::player_movement::{
     confine_player_movement_y
 };
 
+const WINDOW_TITLE: &str = "Bevy Ball Game";
+const WINDOW_WIDTH: (f32, f32) = (640., 480.);
+
 fn main() {
     App::new()
-        .add_plugins(DefaultPlugins)
+        .add_plugins(
+            DefaultPlugins
+                .set(ImagePlugin::default_nearest())
+                .set(WindowPlugin {
+                    primary_window: Some(Window {
+                        title: WINDOW_TITLE.into(),
+                        resolution: WINDOW_WIDTH.into(),
+                        resizable: false,
+                        ..default()
+                    }),
+                    ..default()
+                })
+                .build()
+        )
         .add_systems(Startup, (
             spawn_camera,
             spawn_player,
