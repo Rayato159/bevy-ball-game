@@ -1,11 +1,11 @@
 use bevy::{prelude::*, window::PrimaryWindow};
 use rand::prelude::random;
-use crate::action::player_movement::PLAYER_SIZE;
 
-const NUMBER_OF_ENEMIES: u32 = 4;
-
-#[derive(Component)]
-pub struct Enemy;
+use crate::components::enemy::Enemy;
+use crate::config::enemy::{
+    ENEMY_SIZE,
+    NUMBER_OF_ENEMIES,
+};
 
 pub fn spawn_enemies(
     mut commands: Commands,
@@ -19,11 +19,13 @@ pub fn spawn_enemies(
     
             commands.spawn((
                 SpriteBundle {
-                    transform: Transform::from_xyz(rand_x - PLAYER_SIZE / 2., rand_y - PLAYER_SIZE / 2.,  0.),
+                    transform: Transform::from_xyz(rand_x - ENEMY_SIZE / 2., rand_y - ENEMY_SIZE / 2.,  0.),
                     texture: asset_server.load("sprites/ball_red_large.png"),
                     ..default()
                 },
-                Enemy,
+                Enemy {
+                    size: ENEMY_SIZE,
+                },
             ));
         }
     }

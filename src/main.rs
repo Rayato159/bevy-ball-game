@@ -2,6 +2,8 @@ use bevy::prelude::*;
 
 pub mod setup;
 pub mod action;
+pub mod config;
+pub mod components;
 
 use setup::{
     player::spawn_player,
@@ -15,8 +17,10 @@ use action::player_movement::{
     confine_player_movement_y
 };
 
-const WINDOW_TITLE: &str = "Bevy Ball Game";
-const WINDOW_WIDTH: (f32, f32) = (640., 480.);
+use config::camera::{
+    WINDOW_TITLE,
+    WINDOW_RESOLUTION,
+};
 
 fn main() {
     App::new()
@@ -26,7 +30,7 @@ fn main() {
                 .set(WindowPlugin {
                     primary_window: Some(Window {
                         title: WINDOW_TITLE.into(),
-                        resolution: WINDOW_WIDTH.into(),
+                        resolution: WINDOW_RESOLUTION.into(),
                         resizable: false,
                         ..default()
                     }),

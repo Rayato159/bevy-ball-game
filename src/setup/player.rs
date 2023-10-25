@@ -1,7 +1,10 @@
 use bevy::{prelude::*, window::PrimaryWindow};
 
-#[derive(Component)]
-pub struct Player;
+use crate::components::player::Player;
+use crate::config::player::{
+    PLAYER_SIZE,
+    PLAYER_SPEED,
+};
 
 pub fn spawn_player(
     mut commands: Commands,
@@ -15,7 +18,10 @@ pub fn spawn_player(
                 texture: asset_server.load("sprites/ball_blue_large.png"),
                 ..default()
             },
-            Player,
+            Player {
+                speed: PLAYER_SPEED,
+                size: PLAYER_SIZE,
+            },
         ));
     }
 }
