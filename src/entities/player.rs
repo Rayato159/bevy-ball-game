@@ -1,7 +1,7 @@
 use bevy::{prelude::*, window::PrimaryWindow};
 
 use crate::components::player::Player;
-use crate::config::player::{
+use crate::configs::player::{
     PLAYER_SIZE,
     PLAYER_SPEED,
 };

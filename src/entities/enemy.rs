@@ -2,7 +2,7 @@ use bevy::{prelude::*, window::PrimaryWindow};
 use rand::prelude::random;
 
 use crate::components::enemy::Enemy;
-use crate::config::enemy::{
+use crate::configs::enemy::{
     ENEMY_SIZE,
     NUMBER_OF_ENEMIES,
 };

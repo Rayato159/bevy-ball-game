@@ -1,11 +1,11 @@
 use bevy::prelude::*;
 
-pub mod setup;
+pub mod entities;
 pub mod systems;
-pub mod config;
+pub mod configs;
 pub mod components;
 
-use setup::{
+use entities::{
     player::spawn_player,
     enemy::spawn_enemies,
     camera::spawn_camera
@@ -17,7 +17,7 @@ use systems::player_movement::{
     confine_player_movement_y
 };
 
-use config::camera::{
+use configs::camera::{
     WINDOW_TITLE,
     WINDOW_RESOLUTION,
 };
