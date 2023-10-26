@@ -7,7 +7,7 @@ pub fn player_movement(
     keybaord_input: Res<Input<KeyCode>>,
     time: Res<Time>
 ) {
-    for (mut transform, player) in &mut player_query {
+    for (mut transform, player) in player_query.iter_mut() {
         if keybaord_input.pressed(KeyCode::W) {
             transform.translation.y += player.speed * time.delta_seconds();
         }
@@ -27,7 +27,7 @@ pub fn confine_player_movement_x(
     mut player_query: Query<(&mut Transform, &Player)>,
     window_query: Query<&Window, With<PrimaryWindow>>
 ) {
-    for (mut transform, player) in &mut player_query {
+    for (mut transform, player) in player_query.iter_mut() {
         for window in &window_query {
             let half_player_size = player.size / 2.;
 

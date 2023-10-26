@@ -6,7 +6,7 @@ pub fn enemy_movement(
     mut enemy_query: Query<(&mut Transform, &Enemy)>,
     time: Res<Time>
 ) {
-    for (mut transform, enemy) in &mut enemy_query {
+    for (mut transform, enemy) in enemy_query.iter_mut() {
         let direction = Vec3::new(enemy.direction.x, enemy.direction.y, 0.);
         transform.translation += direction * enemy.speed * time.delta_seconds();
     }
@@ -16,7 +16,7 @@ pub fn update_enemy_direction(
     mut enemy_query: Query<(&Transform, &mut Enemy)>,
     window_query: Query<&Window, With<PrimaryWindow>>
 ) {
-    for (transform, mut enemy) in &mut enemy_query {
+    for (transform, mut enemy) in enemy_query.iter_mut() {
         for window in &window_query {
             let half_enemy_size = enemy.size / 2.;
 
