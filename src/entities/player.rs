@@ -11,11 +11,13 @@ pub fn spawn_player(
     window_query: Query<(&Window, With<PrimaryWindow>)>,
     asset_server: Res<AssetServer>,
 ) {
+    let player_texture = asset_server.load("sprites/ball_blue_large.png");
+
     for (window, _) in window_query.iter() {
         commands.spawn((
             SpriteBundle {
                 transform: Transform::from_xyz(window.width() / 2., window.height() / 2.,  0.),
-                texture: asset_server.load("sprites/ball_blue_large.png"),
+                texture: player_texture.clone(),
                 ..default()
             },
             Player {
