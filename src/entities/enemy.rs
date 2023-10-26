@@ -12,6 +12,8 @@ pub fn spawn_enemies(
     window_query: Query<(&Window, With<PrimaryWindow>)>,
     asset_server: Res<AssetServer>,
 ) {
+    let enemy_texture = asset_server.load("sprites/ball_red_large.png");
+
     for (window, _) in window_query.iter() {
         for _ in 0..NUMBER_OF_ENEMIES {
 
@@ -21,7 +23,7 @@ pub fn spawn_enemies(
             commands.spawn((
                 SpriteBundle {
                     transform: Transform::from_xyz(rand_x, rand_y,  0.),
-                    texture: asset_server.load("sprites/ball_red_large.png"),
+                    texture: enemy_texture.clone(),
                     ..default()
                 },
                 Enemy {
