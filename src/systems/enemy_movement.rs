@@ -12,7 +12,7 @@ pub fn enemy_movement(
     }
 }
 
-pub fn update_enemy_direction_x(
+pub fn update_enemy_direction(
     mut enemy_query: Query<(&Transform, &mut Enemy)>,
     window_query: Query<&Window, With<PrimaryWindow>>
 ) {
@@ -22,24 +22,12 @@ pub fn update_enemy_direction_x(
 
             let x_min = 0.0 + half_enemy_size;
             let x_max = window.width() - half_enemy_size;
+            let y_min = 0.0 + half_enemy_size;
+            let y_max = window.height() - half_enemy_size;
 
             if transform.translation.x < x_min || transform.translation.x > x_max {
                 enemy.direction.x *= -1.;
             }
-        }
-    }
-}
-
-pub fn update_enemy_direction_y(
-    mut enemy_query: Query<(&Transform, &mut Enemy)>,
-    window_query: Query<&Window, With<PrimaryWindow>>
-) {
-    for (transform, mut enemy) in &mut enemy_query {
-        for window in &window_query {
-            let half_enemy_size = enemy.size / 2.;
-
-            let y_min = 0.0 + half_enemy_size;
-            let y_max = window.height() - half_enemy_size;
 
             if transform.translation.y < y_min || transform.translation.y > y_max {
                 enemy.direction.y *= -1.;

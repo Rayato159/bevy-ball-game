@@ -19,8 +19,7 @@ use systems::player_movement::{
 
 use systems::enemy_movement::{
     enemy_movement,
-    update_enemy_direction_x,
-    update_enemy_direction_y
+    update_enemy_direction,
 };
 
 use configs::camera::{
@@ -56,8 +55,7 @@ fn main() {
         ))
         .add_systems(Update, (
             enemy_movement,
-            update_enemy_direction_x,
-            update_enemy_direction_y,
+            update_enemy_direction,
         ))
         .run()
 }
