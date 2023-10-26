@@ -28,22 +28,22 @@ pub fn confine_player_movement_x(
     window_query: Query<&Window, With<PrimaryWindow>>
 ) {
     for (mut transform, player) in &mut player_query {
-        let window = window_query.get_single().unwrap();
+        for window in &window_query {
+            let half_player_size = player.size / 2.;
 
-        let half_player_size = player.size / 2.;
+            let x_min = 0.0 + half_player_size;
+            let x_max = window.width() - half_player_size;
 
-        let x_min = 0.0 + half_player_size;
-        let x_max = window.width() - half_player_size;
+            let mut translation = transform.translation;
 
-        let mut translation = transform.translation;
+            if translation.x < x_min {
+                translation.x = x_min;
+            } else if translation.x > x_max {
+                translation.x = x_max;
+            }
 
-        if translation.x < x_min {
-            translation.x = x_min;
-        } else if translation.x > x_max {
-            translation.x = x_max;
+            transform.translation = translation;
         }
-
-        transform.translation = translation;
     }
 }
 
@@ -52,21 +52,21 @@ pub fn confine_player_movement_y(
     window_query: Query<&Window, With<PrimaryWindow>>
 ) {
     for (mut transform, player) in &mut player_query {
-        let window = window_query.get_single().unwrap();
+        for window in &window_query {
+            let half_player_size = player.size / 2.;
 
-        let half_player_size = player.size / 2.;
+            let y_min = 0.0 + half_player_size;
+            let y_max = window.height() - half_player_size;
 
-        let y_min = 0.0 + half_player_size;
-        let y_max = window.height() - half_player_size;
+            let mut translation = transform.translation;
 
-        let mut translation = transform.translation;
+            if translation.y < y_min {
+                translation.y = y_min;
+            } else if translation.y > y_max {
+                translation.y = y_max;
+            }
 
-        if translation.y < y_min {
-            translation.y = y_min;
-        } else if translation.y > y_max {
-            translation.y = y_max;
+            transform.translation = translation;
         }
-
-        transform.translation = translation;
     }
 }

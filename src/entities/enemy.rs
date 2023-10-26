@@ -4,7 +4,7 @@ use rand::prelude::random;
 use crate::components::enemy::Enemy;
 use crate::configs::enemy::{
     ENEMY_SIZE,
-    NUMBER_OF_ENEMIES,
+    NUMBER_OF_ENEMIES, ENEMY_SPEED,
 };
 
 pub fn spawn_enemies(
@@ -28,6 +28,8 @@ pub fn spawn_enemies(
                 },
                 Enemy {
                     size: ENEMY_SIZE,
+                    speed: ENEMY_SPEED,
+                    direction: Vec2::new(rand_x, rand_y).normalize(),
                 },
             ));
         }

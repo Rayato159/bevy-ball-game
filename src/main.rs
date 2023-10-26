@@ -17,6 +17,12 @@ use systems::player_movement::{
     confine_player_movement_y
 };
 
+use systems::enemy_movement::{
+    enemy_movement,
+    confine_enemy_movement_x,
+    confine_enemy_movement_y
+};
+
 use configs::camera::{
     WINDOW_TITLE,
     WINDOW_RESOLUTION,
@@ -47,6 +53,11 @@ fn main() {
             player_movement,
             confine_player_movement_x,
             confine_player_movement_y,
+        ))
+        .add_systems(Update, (
+            enemy_movement,
+            confine_enemy_movement_x,
+            confine_enemy_movement_y,
         ))
         .run()
 }
