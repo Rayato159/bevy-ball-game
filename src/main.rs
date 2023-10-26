@@ -8,18 +8,16 @@ pub mod components;
 use entities::{
     player::spawn_player,
     enemy::spawn_enemies,
-    camera::spawn_camera
+    camera::spawn_camera,
 };
 
-use systems::player_movement::{
-    player_movement,
-    confine_player_movement_x,
-    confine_player_movement_y
-};
-
-use systems::enemy_movement::{
-    enemy_movement,
-    update_enemy_direction,
+use systems::{
+    player_movement::player_movement,
+    player_movement::confine_player_movement_x,
+    player_movement::confine_player_movement_y,
+    enemy_movement::enemy_movement,
+    enemy_movement::update_enemy_direction,
+    enemy_movement::collisions_sound_effect_spawn,
 };
 
 use configs::camera::{
@@ -56,6 +54,7 @@ fn main() {
         .add_systems(Update, (
             enemy_movement,
             update_enemy_direction,
+            collisions_sound_effect_spawn,
         ))
         .run()
 }
