@@ -19,8 +19,8 @@ use systems::player_movement::{
 
 use systems::enemy_movement::{
     enemy_movement,
-    confine_enemy_movement_x,
-    confine_enemy_movement_y
+    update_enemy_direction_x,
+    update_enemy_direction_y
 };
 
 use configs::camera::{
@@ -56,8 +56,8 @@ fn main() {
         ))
         .add_systems(Update, (
             enemy_movement,
-            confine_enemy_movement_x,
-            confine_enemy_movement_y,
+            update_enemy_direction_x,
+            update_enemy_direction_y,
         ))
         .run()
 }

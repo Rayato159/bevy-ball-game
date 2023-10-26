@@ -12,7 +12,7 @@ pub fn enemy_movement(
     }
 }
 
-pub fn confine_enemy_movement_x(
+pub fn update_enemy_direction_x(
     mut enemy_query: Query<(&Transform, &mut Enemy)>,
     window_query: Query<&Window, With<PrimaryWindow>>
 ) {
@@ -30,7 +30,7 @@ pub fn confine_enemy_movement_x(
     }
 }
 
-pub fn confine_enemy_movement_y(
+pub fn update_enemy_direction_y(
     mut enemy_query: Query<(&Transform, &mut Enemy)>,
     window_query: Query<&Window, With<PrimaryWindow>>
 ) {
