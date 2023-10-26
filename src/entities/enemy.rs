@@ -19,7 +19,7 @@ pub fn spawn_enemies(
     
             commands.spawn((
                 SpriteBundle {
-                    transform: Transform::from_xyz(rand_x - ENEMY_SIZE / 2., rand_y - ENEMY_SIZE / 2.,  0.),
+                    transform: Transform::from_xyz(rand_x, rand_y,  0.),
                     texture: asset_server.load("sprites/ball_red_large.png"),
                     ..default()
                 },
