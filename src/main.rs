@@ -19,6 +19,7 @@ use systems::{
     enemy_movement::update_enemy_direction,
     enemy_movement::collisions_sound_effect_spawn,
     enemy_movement::enemy_hit_player,
+    enemy_movement::exit_game,
 };
 
 use configs::camera::{
@@ -57,6 +58,7 @@ fn main() {
             update_enemy_direction,
             collisions_sound_effect_spawn,
             enemy_hit_player,
+            exit_game,
         ))
         .run()
 }

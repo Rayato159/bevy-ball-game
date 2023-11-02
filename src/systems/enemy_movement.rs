@@ -93,14 +93,10 @@ pub fn collisions_sound_effect_spawn(
 }
 
 pub fn enemy_hit_player(
-    mut commands: Commands,
     enemy_query: Query<(&Transform, &Enemy)>,
-    mut player_query: Query<(Entity, &Transform, &Player)>,
-    asset_server: Res<AssetServer>,
+    mut player_query: Query<(&Transform, &mut Player)>,
 ) {
-    let sound_effect_1 = asset_server.load("audio/explosionCrunch_000.ogg");
-
-    for (player_entity, player_transform, player) in player_query.iter_mut() {
+    for (player_transform, mut player) in player_query.iter_mut() {
         for (enemy_transform, enemy) in enemy_query.iter() {
             let distance = player_transform.translation.distance(enemy_transform.translation);
 
@@ -108,10 +104,28 @@ pub fn enemy_hit_player(
             let enemy_radius = enemy.size / 2.;
 
             if distance < player_radius + enemy_radius {
-                println!("Game Over");
+                player.is_dead = true;
+            }
+        }
+    }
+}
+
+pub fn exit_game(
+    mut commands: Commands,
+    mut player_query: Query<(Entity, &Player)>,
+    mut enemy_query: Query<&mut Enemy>,
+    mut app_exit_events: ResMut<Events<bevy::app::AppExit>>,
+    keyboard_input: Res<Input<KeyCode>>,
+    asset_server: Res<AssetServer>,
+) {
+    let dead_sound_effect = asset_server.load("audio/explosionCrunch_000.ogg");
+
+    for (player_entity, player) in player_query.iter_mut() {
+        for mut enemy in enemy_query.iter_mut() {
+            if player.is_dead {
                 commands.spawn((
                     AudioBundle {
-                        source: sound_effect_1.clone().into(),
+                        source: dead_sound_effect.clone().into(),
                         settings: PlaybackSettings { 
                             mode: bevy::audio::PlaybackMode::Despawn,
                             ..default()
@@ -120,9 +134,16 @@ pub fn enemy_hit_player(
                     },
                     SoundEffect,
                 ));
-                
+
                 commands.entity(player_entity).despawn();
+                
+                enemy.speed = 0.0;
             }
+
         }
+    }
+
+    if keyboard_input.just_pressed(KeyCode::Space) {
+        app_exit_events.send(bevy::app::AppExit);
     }
 }

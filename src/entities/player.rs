@@ -23,6 +23,7 @@ pub fn spawn_player(
             Player {
                 speed: PLAYER_SPEED,
                 size: PLAYER_SIZE,
+                is_dead: false,
             },
         ));
     }

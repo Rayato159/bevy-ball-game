@@ -4,20 +4,20 @@ use crate::components::player::Player;
 
 pub fn player_movement(
     mut player_query: Query<(&mut Transform, &Player)>,
-    keybaord_input: Res<Input<KeyCode>>,
+    keyboard_input: Res<Input<KeyCode>>,
     time: Res<Time>
 ) {
     for (mut transform, player) in player_query.iter_mut() {
-        if keybaord_input.pressed(KeyCode::W) {
+        if keyboard_input.pressed(KeyCode::W) {
             transform.translation.y += player.speed * time.delta_seconds();
         }
-        if keybaord_input.pressed(KeyCode::S) {
+        if keyboard_input.pressed(KeyCode::S) {
             transform.translation.y -= player.speed * time.delta_seconds();
         }
-        if keybaord_input.pressed(KeyCode::A) {
+        if keyboard_input.pressed(KeyCode::A) {
             transform.translation.x -= player.speed * time.delta_seconds();
         }
-        if keybaord_input.pressed(KeyCode::D) {
+        if keyboard_input.pressed(KeyCode::D) {
             transform.translation.x += player.speed * time.delta_seconds();
         }
     }

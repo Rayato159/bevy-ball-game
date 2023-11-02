@@ -4,5 +4,6 @@ use bevy::prelude::*;
 
 pub struct Player {
     pub speed: f32,
-    pub size: f32
+    pub size: f32,
+    pub is_dead: bool,
 }
