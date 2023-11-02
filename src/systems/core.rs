@@ -42,7 +42,7 @@ pub fn exit_game(
     keyboard_input: Res<Input<KeyCode>>,
     mut app_exit_events: ResMut<Events<AppExit>>
 ) {
-    if keyboard_input.just_pressed(KeyCode::Space) {
+    if keyboard_input.just_pressed(KeyCode::Escape) {
         app_exit_events.send(bevy::app::AppExit);
     }
 }
