@@ -1,8 +1,11 @@
 use bevy::{prelude::*, window::PrimaryWindow};
 use rand::random;
 
-use crate::components::enemy::Enemy;
-use crate::components::audio::SoundEffect;
+use crate::components::{
+    enemy::Enemy,
+    player::Player,
+    audio::SoundEffect,
+};
 
 pub fn enemy_movement(
     mut enemy_query: Query<(&mut Transform, &Enemy)>,
@@ -76,6 +79,39 @@ pub fn collisions_sound_effect_spawn(
                 commands.spawn((
                     AudioBundle {
                         source: sound_effect.into(),
+                        settings: PlaybackSettings { 
+                            mode: bevy::audio::PlaybackMode::Despawn,
+                            ..default()
+                        },
+                        ..default()
+                    },
+                    SoundEffect,
+                ));
+            }
+        }
+    }
+}
+
+pub fn enemy_hit_player(
+    mut commands: Commands,
+    enemy_query: Query<(&Transform, &Enemy)>,
+    player_query: Query<(&Transform, &Player)>,
+    asset_server: Res<AssetServer>,
+) {
+    let sound_effect_1 = asset_server.load("audio/explosionCrunch_000.ogg");
+
+    for (player_transform, player) in player_query.iter() {
+        for (enemy_transform, enemy) in enemy_query.iter() {
+            let distance = player_transform.translation.distance(enemy_transform.translation);
+
+            let player_radius = player.size / 2.;
+            let enemy_radius = enemy.size / 2.;
+
+            if distance < player_radius + enemy_radius {
+                println!("Game Over");
+                commands.spawn((
+                    AudioBundle {
+                        source: sound_effect_1.clone().into(),
                         settings: PlaybackSettings { 
                             mode: bevy::audio::PlaybackMode::Despawn,
                             ..default()
