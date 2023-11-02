@@ -114,8 +114,6 @@ pub fn exit_game(
     mut commands: Commands,
     mut player_query: Query<(Entity, &Player)>,
     mut enemy_query: Query<&mut Enemy>,
-    mut app_exit_events: ResMut<Events<bevy::app::AppExit>>,
-    keyboard_input: Res<Input<KeyCode>>,
     asset_server: Res<AssetServer>,
 ) {
     let dead_sound_effect = asset_server.load("audio/explosionCrunch_000.ogg");
@@ -141,9 +139,5 @@ pub fn exit_game(
             }
 
         }
-    }
-
-    if keyboard_input.just_pressed(KeyCode::Space) {
-        app_exit_events.send(bevy::app::AppExit);
     }
 }
