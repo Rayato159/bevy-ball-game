@@ -19,6 +19,7 @@ use systems::{
     enemy_movement::update_enemy_direction,
     enemy_movement::collisions_sound_effect_spawn,
     enemy_movement::enemy_hit_player,
+    core::game_over,
     core::exit_game,
 };
 
@@ -59,8 +60,9 @@ fn main() {
             collisions_sound_effect_spawn,
             enemy_hit_player,
         ))
-        .add_systems(Update,
+        .add_systems(Update, (
+            game_over,
             exit_game,
-        )
+        ))
         .run()
 }
